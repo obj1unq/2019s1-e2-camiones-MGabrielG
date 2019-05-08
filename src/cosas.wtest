@@ -1,0 +1,5 @@
+import cosas.*
+
+test "bateriaAntiaerea" {
+	assert.that(bateriaAntiaerea.peso() == 300)
+}

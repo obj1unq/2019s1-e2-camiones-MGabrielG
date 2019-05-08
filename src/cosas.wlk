@@ -10,3 +10,44 @@ object bumblebee {
 	method nivelPeligrosidad() { return if (transformadoEnAuto) { 15 } else { 30 }  }
 	method transformar() { transformadoEnAuto = not transformadoEnAuto }
 }
+
+object paqueteDeLadrillos {
+	var property cantidadDeLadrillos = 1
+	
+	method nivelPeligrosidad() { return 2}
+	method peso() { return cantidadDeLadrillos * 2 }
+}
+
+object arenaAGranel {
+	var property peso = 1
+	
+	method nivelPeligrosidad() { return 1 }
+}
+
+object bateriaAntiaerea {
+	var property tieneMisiles = true
+	
+	method peso() { return if (tieneMisiles) 300 else 200 }
+	method nivelPeligrosidad() { return if (tieneMisiles) 100 else 0 }
+}
+
+object contenedorPortuario {
+	var property cosas = []
+	
+	method peso() { return 100 + cosas.sum({ cosa => cosa.peso() }) }
+	method nivelPeligrosisdad() { return cosas.max({ cosa => cosa.nivelPeligrosidad() }) }
+} 
+
+object residuosRadioactivos {
+	var property peso = 1
+	
+	method nivelPeligrosidad() { return 200 }
+}
+
+object embalajeDeSeguridad {
+	var property contenido = bumblebee
+	
+	method peso() { return contenido.peso() }
+	method nivelPeligrosidad() { return contenido.nivelPeligrosidad() / 2}
+}
+
