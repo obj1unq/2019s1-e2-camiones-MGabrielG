@@ -6,6 +6,7 @@ object camion {
 	var property pesoMaximo = 2500
 	
 	method cargar(unaCosa) {
+		unaCosa.esCargada()
 		cosas.add(unaCosa)
 	}
 	
@@ -34,7 +35,7 @@ object camion {
 	}
 	
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad) {
-		return cosas.any({cosa => cosa.nivelPeligrosidad() < nivelMaximoPeligrosidad})
+		return cosas.all({cosa => cosa.nivelPeligrosidad() < nivelMaximoPeligrosidad})
 	}
 	
 /*------------------------------------AGREGADOS AL CAMIÓN------------------------------------------------*/
@@ -43,6 +44,16 @@ object camion {
 		return cosas.any({ cosa => (cosa.peso() > min) && (cosa.peso() < max) })
 	}
 	
+	method cosaMasPesada() {
+		return cosas.max({ cosa => cosa.peso()})
+	}
 	
+	method totalBultos() {
+		return cosas.sum({ cosa => cosa.bulto()})
+	}
+	
+	method pesos() {
+		return cosas.map({cosa => cosa.peso()})
+	}
 	
 }
