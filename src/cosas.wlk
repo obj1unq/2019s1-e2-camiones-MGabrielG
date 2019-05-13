@@ -27,12 +27,12 @@ object paqueteDeLadrillos {
 
 	method bulto() { 
 		return if (cantidadDeLadrillos <= 100) {
-			1
-		} else if (cantidadDeLadrillos <= 300) {
-			2
-		} else {
-			3
-		}			
+				1
+			} else if (cantidadDeLadrillos <= 300) {
+				2
+			} else {
+				3
+			}			
 	}	
 	method esCargado() {
 		cantidadDeLadrillos += 12
@@ -56,7 +56,7 @@ object arenaAGranel {
 object bateriaAntiaerea {
 	var property tieneMisiles = true
 
-	method bulto() { return if (tieneMisiles) 1 else 2 }	
+	method bulto() { return if (tieneMisiles) 2 else 1 }	
 	method esCargado() {
 		tieneMisiles = true
 	}
