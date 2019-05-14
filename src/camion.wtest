@@ -1,0 +1,101 @@
+import camion.*
+import cosas.*
+
+
+describe "Tests con Knight Rider y Bublebee" {
+
+	fixture{
+		camion.cargar(knightRider)
+		camion.cargar(bumblebee)
+	}
+
+
+	test "cargar" {
+		camion.cargar(bumblebee)
+		
+		assert.that(camion.cosas().contains(bumblebee))
+	}
+
+	test "descargar" {
+		camion.descargar(knightRider)
+		
+		assert.notThat(camion.cosas().contains(knightRider))
+	}
+
+	test "pesoTotal" {
+		assert.that(camion.pesoTotal() == 2300)
+	}
+	
+	test "excedidoDePeso" {
+		camion.cargar(knightRider)
+		camion.cargar(knightRider)
+		camion.cargar(knightRider)
+		
+		assert.that(camion.excedidoDePeso())
+	}
+	
+	test "objetosPeligrosos" {
+		assert.that(camion.objetosPeligrosos(14) == [bumblebee])
+	}
+	
+	test "objetosPeligrosos2" {
+		assert.that(camion.objetosPeligrosos(16) == [])
+	}
+	
+	test "objetosPeligrosos3" {
+		bumblebee.transformar()
+		assert.that(camion.objetosPeligrosos(16) == [bumblebee])
+	}
+	
+	test "objetosMasPeligrososQue" {
+		assert.that(camion.objetosMasPeligrososQue(knightRider) == [bumblebee])
+	}
+	
+	test "puedeCircularEnRuta" {
+		assert.that(camion.puedeCircularEnRuta(16))
+	}
+	
+	test "puedeCircularEnRuta2" {
+		bumblebee.transformar()
+		
+		assert.notThat(camion.puedeCircularEnRuta(16))
+	}	
+	
+	test "tieneAlgoQuePesaEntre1" {
+		assert.that(camion.tieneAlgoQuePesaEntre(700, 900))
+	}
+
+	test "tieneAlgoQuePesaEntre2" {
+		assert.that(camion.tieneAlgoQuePesaEntre(400, 600))
+	}
+
+	test "tieneAlgoQuePesaEntre3" {
+		assert.notThat(camion.tieneAlgoQuePesaEntre(600, 800))
+	}
+
+	test "cosaMasPesada" {	
+		assert.that(camion.cosaMasPesada() == bumblebee)
+	}
+
+	test "totalBultos1" {
+		assert.that(camion.totalBultos() == 3)
+	}
+	
+	test "totalBultos2" {
+		camion.descargar(knightRider)
+		
+		assert.that(camion.totalBultos() == 2)
+	}
+
+	test "totalBultos3" {
+		camion.descargar(bumblebee)
+		
+		assert.that(camion.totalBultos() == 1)
+	}	
+	
+	test "pesos" {		
+		assert.that(camion.pesos() == [500, 800] )
+	}
+	
+}
+
